@@ -1,0 +1,50 @@
+{
+  "name": "Calendar Agent – Test Wrapper",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "query",
+              "value": "Create an event called Thinai Marketing Sync tomorrow 10am to 11am",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "2",
+      "name": "Set Query",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "workflowId": "🤖 Calendar Agent"
+      },
+      "id": "3",
+      "name": "Execute Calendar Agent",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [780, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{ "node": "Set Query", "type": "main", "index": 0 }]]
+    },
+    "Set Query": {
+      "main": [[{ "node": "Execute Calendar Agent", "type": "main", "index": 0 }]]
+    }
+  }
+}
